@@ -1,6 +1,6 @@
 Todo 
 Api chess positions 
-Draw chess board canvas
-canvas met pieces
+
+
 clicking
 Game logic

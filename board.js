@@ -12,21 +12,21 @@ class Board {
         if (i < 0 || i >= this.columns || j < 0 || j >= this.rows) {
             throw `OUT OF BOUNDS ERROR IN PUT i was ${i}, j was ${j}`
         }
-        this.arr[i * this.columns + j] = el
+        this.arr[(i * this.columns) + j] = el
     }
 
     get(i, j) {
         if (i < 0 || i >= this.columns || j < 0 || j >= this.rows) {
             throw `OUT OF BOUNDS ERROR IN PUT i was ${i}, j was ${j}`
         }
-        return this.arr[i * this.columns + j]
+        return this.arr[(i * this.columns) + j]
     }
 
     display() {
         let str = ` `
         for (let i = 1; i <= this.rows * this.columns; i++) {
             str += this.arr[i - 1]
-            str += '\t'
+            str += '  '
             if ((i % this.rows) === 0) {
                 str += ' \n '
             }
@@ -48,7 +48,7 @@ class Board {
     }
 
     generateRandomPosition2() {
-        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"];
+        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"]; //if this chanfes enumpieces must be changed as well! 
         this.foreach(
             (i, j) => {
                 let piece = pieces[Math.round(Math.random() * 11)];
@@ -58,6 +58,11 @@ class Board {
             })
     }
 
+    //fn is a function with arguments i and j, it will apply fn(i,j) for all i,j
+    //will travers row per row
+    // -> -> -> 
+    // -> -> -> 
+    // -> -> ->
     foreach(fn) {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
@@ -65,7 +70,28 @@ class Board {
             }
         }
     }
+
+    display2() {
+        let str = ``
+        this.foreach((i, j) => {
+            str += this.get(i, j);
+            str += '  '
+            if (j === this.rows - 1) { str += '\n' }
+        })
+        console.log(str)
+    }
+
+    foreachtest() {
+        console.log("for each test")
+        this.foreach((i, j) => (console.log("i: ", i, "j: ", j)))
+    }
+
+
 }
 
 const b = new Board(8, 8)
 b.display()
+console.log("\n")
+b.display2()
+
+b.foreachtest()

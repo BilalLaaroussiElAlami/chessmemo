@@ -12,3 +12,6 @@ const Piece = {
     wq: "wq",
     wr: "wr"
 }
+for (let p in Piece) {
+    console.log(p)
+}

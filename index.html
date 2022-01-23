@@ -9,35 +9,56 @@
 <body>
     <h1>hello world</h1>
 
+
+    <canvas id="background" width="600" height="600"></canvas>
+    <canvas id="pieces" width="300" height="300"></canvas>
+
     <script src="board.js"></script>
     <script src="app.js"></script>
 
 
     <img src="boardcropped.png" style="display: none;" id="board">
-    <img src="media/bb.png" class="piece">
-    <img src="media/bk.png" class="piece">
-    <img src="media/bn.png" class="piece">
-    <img src="media/bp.png" class="piece">
-    <img src="media/bb.png" class="piece">
-    <img src="media/bq.png" class="piece">
-    <img src="media/br.png" class="piece">
 
-    <img src="media/wb.png" class="piece">
-    <img src="media/wk.png" class="piece">
-    <img src="media/wn.png" class="piece">
-    <img src="media/wp.png" class="piece">
-    <img src="media/wq.png" class="piece">
-    <img src="media/wb.png" class="piece">
+    <img src="media/bb.png" id="bb" class="piece">
+    <img src="media/bk.png" id="bk" class="piece">
+    <img src="media/bn.png" id="bn" class="piece">
+    <img src="media/bp.png" id="bp" class="piece">
+    <img src="media/bq.png" id="bq" class="piece">
+    <img src="media/br.png" id="br" class="piece">
 
-
-
+    <img src="media/wb.png" id="wb" class="piece">
+    <img src="media/wk.png" id="wk" class="piece">
+    <img src="media/wn.png" id="wn" class="piece">
+    <img src="media/wp.png" id="wp" class="piece">
+    <img src="media/wq.png" id="wq" class="piece">
+    <img src="media/wb.png" id="wb" class="piece">
+    <img src="media/wr.png" id="wr" class="piece">
 
 
 
 
-    <canvas id="background" width="600" height="600"></canvas>
-    <canvas id="foreground" width="100" height="100"></canvas>
-    <canvas id="pieces" width="300" height="300"></canvas>
+
+    <!-- dynamically change size of images -->
+    <!-- <script>
+        let square_size = (document.getElementById("foreground").width) / 8 //hard coded 8 in here!
+        for (let img of (document.getElementsByClassName("piece"))) {
+
+            img.style.height = square_size
+            img.style.width = square_size
+
+        }
+    </script> -->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
