@@ -3,7 +3,8 @@ class Board {
         this.rows = rows;
         this.columns = columns;
         this.arr = []
-        this.generateRandomPosition()
+        this.generateRandomPosition2()
+
     }
 
     //i-th row, j-th column
@@ -43,6 +44,25 @@ class Board {
         for (let i = 0; i < this.rows * this.columns; i++) {
             let r = Math.round(Math.random() * 4)
             this.arr[i] = r
+        }
+    }
+
+    generateRandomPosition2() {
+        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"];
+        this.foreach(
+            (i, j) => {
+                let piece = pieces[Math.round(Math.random() * 11)];
+                this.put(i, j, piece)
+
+
+            })
+    }
+
+    foreach(fn) {
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.columns; j++) {
+                fn(i, j)
+            }
         }
     }
 }
