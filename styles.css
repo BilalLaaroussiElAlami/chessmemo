@@ -1,0 +1,21 @@
+#background{
+    position: fixed; 
+    left: 100px; 
+    top: 100px; 
+    z-index: 0; 
+    background-color: blue;
+}
+#foreground{
+    position: fixed;
+    left: 100px;
+    top: 100px;
+    z-index: 1;
+    background-color: red;
+}
+
+#pieces{
+    position:fixed; 
+    left:800px; 
+    top:100px;
+    background-color: bisque
+}
