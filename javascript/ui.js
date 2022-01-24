@@ -30,23 +30,26 @@ function setupContext() {
 
 }
 
-drawPiece = function (piece, i, j) {
-    let square_size = (document.getElementById("background").width) / 8
+drawPiece = function (ctx, piece, i, j) {
+    let square_size = canvasback.width / 8     //hard coded 8 --> hard coded square-size, different sizes of peices not possible
     let img = document.getElementById(piece)
     let x = j * square_size
     let y = i * square_size
-    ctxback.drawImage(img, x, y, 75, 75)
-
+    ctx.drawImage(img, x, y, 75, 75)
 }
 
 
 
-drawBoard = function (board) {
-    board.foreach((i, j) => drawPiece(board.get(i, j), i, j))
+function drawGenericBoard(board, ctx) {
+    board.foreach((i, j) => drawPiece(ctx, board.get(i, j), i, j))
 }
 
-drawStorage = function (board) {
+function drawBoard(board) {
+    drawGenericBoard(board, ctxback)
+}
 
+function drawStorageBoard(board) {
+    drawGenericBoard(board, ctxstorage)
 }
 
 
@@ -59,7 +62,7 @@ function UItest() {
     b.generateRandomPosition()
     drawBoard(b)
     var s = new StorageBoard()
-
+    drawStorageBoard(s)
     console.log("END STORAGE TEST")
 
 }

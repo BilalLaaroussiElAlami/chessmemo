@@ -97,7 +97,7 @@ class StorageBoard extends Board {
             [
                 "br", "bn", "bb", "bq", "bk", "bb", "bn", "br",
                 "bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp",
-                "wn", "wn", "wn", "wn", "wn", "wn", "wn", "wn",
+                "wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp",
                 "wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"
             ]
         )
