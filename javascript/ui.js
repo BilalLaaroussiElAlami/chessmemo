@@ -39,7 +39,6 @@ drawPiece = function (ctx, piece, i, j) {
 }
 
 
-
 function drawGenericBoard(board, ctx) {
     board.foreach((i, j) => drawPiece(ctx, board.get(i, j), i, j))
 }
@@ -55,7 +54,7 @@ function drawStorageBoard(board) {
 
 
 function UItest() {
-    console.log("BEGIN CONTEXT TEST")
+    console.log("BEGIN UI TEST")
     console.log("ctxback: ", this.ctxback)
     console.log("ctxstorage: ", this.ctxstorage)
     var b = new Board(8, 8)
@@ -63,7 +62,7 @@ function UItest() {
     drawBoard(b)
     var s = new StorageBoard()
     drawStorageBoard(s)
-    console.log("END STORAGE TEST")
+    console.log("END UI TEST")
 
 }
 
@@ -85,6 +84,6 @@ function getSource(x, y) {
 
     }
     else {
-        return ["null"]
+        return null
     }
 }

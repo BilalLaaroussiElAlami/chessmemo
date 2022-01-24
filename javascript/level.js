@@ -12,16 +12,11 @@ zoja: 1) doe de piece weg uit zijn originele bord, 2) zet de piece op de destina
 doe staat holdin-piece in elk geval uit.
 */
 
-function setup() {
-    let board = new Board(8, 8) //hard coded 8
-    board.generateRandomPosition()  //later integrate with api calls
-    let storage = new Board(8, 4)
-    drawBoard(board)
-    drawBoard(storage)
-
-
-}
+//setup board and storage
+let board = new Board(8, 8)
+let storage = new StorageBoard()
 let body = document.querySelector("body")
+
 body.onclick = function (e) {
     console.log("x: ", e.clientX, "y: ", e.clientY)
 
@@ -30,4 +25,9 @@ body.onclick = function (e) {
 
 }
 
+
+
+handleMouseMove = function (e) { console.log("mouse location:", e.clientX, e.clientY) }
+
+document.onmousemove = handleMouseMove
 
