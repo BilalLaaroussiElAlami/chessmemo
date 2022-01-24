@@ -1,31 +1,69 @@
-var canvas
-var ctx
+
+var canvasback
+var ctxback //main board background
+
+var canvasstorage
+var ctxstorage //storage board background
 
 //draw picture chess board on background canvas
-function drawbackground() {
+function drawboardbackground() {
     var image = document.getElementById("board")
-    ctx.drawImage(image, 0, 0, canvas.clientWidth, canvas.clientHeight)
+    ctxback.drawImage(image, 0, 0, canvasback.clientWidth, canvasback.clientHeight)
+}
+//draw storageboard png on storageboard canvas
+function drawStorageBackground() {
+    var image = document.getElementById("storageboard")
+    ctxstorage.drawImage(image, 0, 0, canvasstorage.clientWidth, canvasstorage.clientHeight)
 }
 window.onload = function () {
-    this.canvas = document.getElementById("background");
-    this.ctx = canvas.getContext("2d");
-    drawbackground()
-    drawBoard(b)
+    setupContext()
+    drawboardbackground()
+    drawStorageBackground()
+    UItest()
+
+}
+function setupContext() {
+    this.canvasback = document.getElementById("background");
+    this.ctxback = canvasback.getContext("2d");
+    this.canvasstorage = document.getElementById("storage");
+    this.ctxstorage = canvasstorage.getContext("2d")
+
 }
 
 drawPiece = function (piece, i, j) {
-
     let square_size = (document.getElementById("background").width) / 8
     let img = document.getElementById(piece)
     let x = j * square_size
     let y = i * square_size
-    // console.log("i:", i, "j: ", j, "x: ", x, "y: ", y, "piece: ", piece)
-    ctx.drawImage(img, x, y, 75, 75)
+    ctxback.drawImage(img, x, y, 75, 75)
 
 }
+
+
+
 drawBoard = function (board) {
     board.foreach((i, j) => drawPiece(board.get(i, j), i, j))
 }
+
+drawStorage = function (board) {
+
+}
+
+
+
+function UItest() {
+    console.log("BEGIN CONTEXT TEST")
+    console.log("ctxback: ", this.ctxback)
+    console.log("ctxstorage: ", this.ctxstorage)
+    var b = new Board(8, 8)
+    b.generateRandomPosition()
+    drawBoard(b)
+    var s = new StorageBoard()
+
+    console.log("END STORAGE TEST")
+
+}
+
 
 /*
 x and y are coordinate, return array [source, i, j]

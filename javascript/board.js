@@ -1,37 +1,26 @@
+
 class Board {
     constructor(rows, columns) {
         this.rows = rows;
         this.columns = columns;
-        this.arr = []
-        this.generateRandomPosition2()
+        this.arr = Array.apply(null, Array(rows * columns));
+
 
     }
 
     //i-th row, j-th column
     put(i, j, el) {
-        if (i < 0 || i >= this.columns || j < 0 || j >= this.rows) {
+        if (i < 0 || i >= this.rows || j < 0 || j >= this.columns) {
             throw `OUT OF BOUNDS ERROR IN PUT i was ${i}, j was ${j}`
         }
         this.arr[(i * this.columns) + j] = el
     }
 
     get(i, j) {
-        if (i < 0 || i >= this.columns || j < 0 || j >= this.rows) {
-            throw `OUT OF BOUNDS ERROR IN PUT i was ${i}, j was ${j}`
+        if (i < 0 || i >= this.rows || j < 0 || j >= this.columns) {
+            throw `OUT OF BOUNDS ERROR IN GET i was ${i}, j was ${j}`
         }
         return this.arr[(i * this.columns) + j]
-    }
-
-    display() {
-        let str = ` `
-        for (let i = 1; i <= this.rows * this.columns; i++) {
-            str += this.arr[i - 1]
-            str += '  '
-            if ((i % this.rows) === 0) {
-                str += ' \n '
-            }
-        }
-        console.log(str)
     }
 
     initialise() {
@@ -41,14 +30,7 @@ class Board {
     }
 
     generateRandomPosition() {
-        for (let i = 0; i < this.rows * this.columns; i++) {
-            let r = Math.round(Math.random() * 4)
-            this.arr[i] = r
-        }
-    }
-
-    generateRandomPosition2() {
-        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"]; //if this chanfes enumpieces must be changed as well! 
+        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"]; //if this changes enumpieces must be changed as well! 
         this.foreach(
             (i, j) => {
                 let piece = pieces[Math.round(Math.random() * 11)];
@@ -57,6 +39,18 @@ class Board {
 
             })
     }
+
+    fill(input_arr) {
+        if (input_arr.length !== this.arr.length) {
+            throw "DIMENSIONS NOT THE SAME ERROR"
+        }
+        //also need to check every element is valid piece
+        else {
+            this.arr = input_arr
+        }
+
+    }
+
 
     //fn is a function with arguments i and j, it will apply fn(i,j) for all i,j
     //will travers row per row
@@ -71,12 +65,12 @@ class Board {
         }
     }
 
-    display2() {
+    display() {
         let str = ``
         this.foreach((i, j) => {
             str += this.get(i, j);
             str += '  '
-            if (j === this.rows - 1) { str += '\n' }
+            if (j === this.columns - 1) { str += '\n' }
         })
         console.log(str)
     }
@@ -89,7 +83,26 @@ class Board {
 
 }
 
-const b = new Board(8, 8)
-b.display()
-console.log("\n")
-b.display2()
+class StorageBoard extends Board {
+
+
+    constructor() {
+        super(4, 8);
+        this.makeStorageBoard()
+    }
+
+    //maybe subclassing?
+    makeStorageBoard() {
+        this.fill(
+            [
+                "br", "bn", "bb", "bq", "bk", "bb", "bn", "br",
+                "bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp",
+                "wn", "wn", "wn", "wn", "wn", "wn", "wn", "wn",
+                "wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"
+            ]
+        )
+    }
+}
+
+
+

@@ -12,6 +12,15 @@ zoja: 1) doe de piece weg uit zijn originele bord, 2) zet de piece op de destina
 doe staat holdin-piece in elk geval uit.
 */
 
+function setup() {
+    let board = new Board(8, 8) //hard coded 8
+    board.generateRandomPosition()  //later integrate with api calls
+    let storage = new Board(8, 4)
+    drawBoard(board)
+    drawBoard(storage)
+
+
+}
 let body = document.querySelector("body")
 body.onclick = function (e) {
     console.log("x: ", e.clientX, "y: ", e.clientY)
@@ -19,27 +28,6 @@ body.onclick = function (e) {
 
     console.log(getSource(e.clientX, e.clientY))
 
-
 }
 
 
-
-function update(progress) {
-    // Update the state of the world for the elapsed time since last render
-}
-
-function draw() {
-    // Draw the state of the world
-}
-
-function loop(timestamp) {
-    var progress = timestamp - lastRender
-
-    update(progress)
-    draw()
-
-    lastRender = timestamp
-    window.requestAnimationFrame(loop)
-}
-var lastRender = 0
-window.requestAnimationFrame(loop)
