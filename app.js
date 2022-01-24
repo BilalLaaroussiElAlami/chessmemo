@@ -14,9 +14,13 @@ window.onload = function () {
 }
 
 drawPiece = function (piece, i, j) {
+
     let square_size = (document.getElementById("background").width) / 8
     let img = document.getElementById(piece)
-    ctx.drawImage(img, i * square_size, j * square_size, 75, 75)
+    let x = j * square_size
+    let y = i * square_size
+    console.log("i:", i, "j: ", j, "x: ", x, "y: ", y, "piece: ", piece)
+    ctx.drawImage(img, x, y, 75, 75)
 
 }
 drawPieces = function (board) {

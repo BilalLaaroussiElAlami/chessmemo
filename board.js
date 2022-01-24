@@ -93,5 +93,3 @@ const b = new Board(8, 8)
 b.display()
 console.log("\n")
 b.display2()
-
-b.foreachtest()
