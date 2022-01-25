@@ -3,7 +3,7 @@ import { Board, StorageBoard } from "./board.js";
 
 import { boardType } from "./enumboard.js"
 import { Piece } from "./enumpieces.js"
-import { draw, getSource } from "./ui.js"
+import { draw, getSource, drawPieceEther } from "./ui.js"
 /*
 functie pickup 
 check holding === false 
@@ -22,7 +22,7 @@ zoja drop piece op de plek, en verwijder piece van bron
 let board = new Board(8, 8)
 board.generateRandomPosition()
 let storage = new StorageBoard()
-let holdingPiece = false
+let holdingPiece = false  //[boardType, i, j]
 
 
 
@@ -33,6 +33,7 @@ function pickup(source) {
     let j = source[2]
     if (holdingPiece === false && sourceBoard.get(i, j) !== Piece.empty) {
         holdingPiece = source
+        // sourceBoard.put(i, j, Piece.empty)
     }
 }
 //assumes good source (cursor on valid board)
@@ -79,6 +80,12 @@ body.onclick = function (e) {
 //MouseMovement
 function handleMouseMove(e) {
     //console.log("mouse location:", e.clientX, e.clientY)
+    if (holdingPiece !== false) {
+        let sourceBoard = (holdingPiece[0] === boardType.board) ? board : storage
+        let i = holdingPiece[1]
+        let j = holdingPiece[2]
+        drawPieceEther(sourceBoard.get(i, j), e.clientX, e.clientY)
+    }
 }
 
 document.onmousemove = handleMouseMove

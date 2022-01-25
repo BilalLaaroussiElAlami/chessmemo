@@ -9,6 +9,9 @@ var ctxback  //main board background
 var canvasstorage
 var ctxstorage//storage board background
 
+var canvasether
+var ctxether
+
 //draw picture chess board on background canvas
 function drawboardbackground() {
     var image = document.getElementById("board")
@@ -32,17 +35,26 @@ function setupContext() {
     canvasstorage = document.getElementById("storage");
     ctxstorage = canvasstorage.getContext("2d")
 
+    canvasether = document.getElementById("ether")
+    ctxether = canvasether.getContext("2d")
+
 }
 
 function drawPiece(ctx, piece, i, j) {
     if (piece === Piece.empty) { return }
-    let square_size = canvasback.width / 8     //hard coded 8 --> hard coded square-size, different sizes of peices not possible
+    let square_size = canvasback.width / 8     //hard coded 8 --> hard coded square-size, different sizes of pieces not possible
     let img = document.getElementById(piece)
     let x = j * square_size
     let y = i * square_size
     ctx.drawImage(img, x, y, 75, 75)
 }
 
+function drawPieceEther(piece, x, y) {
+    ctxether.clearRect(0, 0, ctxether.canvas.width, ctxether.canvas.width) //remove for cool effect
+    console.log("ether: ", piece, x, y)
+    let img = document.getElementById(piece)
+    ctxether.drawImage(img, (x - 37), (y - 37), 75, 75)
+}
 
 function drawGenericBoard(board, ctx) {
     board.foreach((i, j) => drawPiece(ctx, board.get(i, j), i, j))
@@ -59,6 +71,7 @@ function drawStorageBoard(board) {
 function draw(board, storageBoard) {
     ctxback.clearRect(0, 0, ctxback.canvas.width, ctxback.canvas.height);
     ctxstorage.clearRect(0, 0, ctxstorage.canvas.width, ctxstorage.canvas.height);
+    ctxether.clearRect(0, 0, ctxether.canvas.width, ctxether.canvas.width);
     drawboardbackground()
     drawStorageBackground()
     drawBoard(board)
@@ -114,4 +127,4 @@ function getSource(x, y) {
 }
 
 
-export { getSource, draw }
+export { getSource, draw, drawPieceEther }
