@@ -2,6 +2,7 @@ import { Piece } from "./enumpieces.js"
 import { boardType } from "./enumboard.js"
 import { Board, StorageBoard } from "./board.js"
 
+
 var canvasback
 var ctxback  //main board background
 
@@ -23,7 +24,6 @@ window.onload = function () {
     drawboardbackground()
     drawStorageBackground()
     //UItest()
-
 
 }
 function setupContext() {
@@ -54,6 +54,15 @@ function drawBoard(board) {
 
 function drawStorageBoard(board) {
     drawGenericBoard(board, ctxstorage)
+}
+
+function draw(board, storageBoard) {
+    ctxback.clearRect(0, 0, ctxback.canvas.width, ctxback.canvas.height);
+    ctxstorage.clearRect(0, 0, ctxstorage.canvas.width, ctxstorage.canvas.height);
+    drawboardbackground()
+    drawStorageBackground()
+    drawBoard(board)
+    drawStorageBoard(storageBoard)
 }
 
 
@@ -92,7 +101,6 @@ function getSource(x, y) {
 
     }
     if (x >= rectstorage.left && x <= rectstorage.right && y >= rectstorage.top && y <= rectstorage.bottom) {
-        console.log("ok")
         let relativeX = x - rectstorage.left
         let relativeY = y - rectstorage.top
         let j = Math.floor((relativeX / rectstorage.width) * 8) //hard coded 8
@@ -106,4 +114,4 @@ function getSource(x, y) {
 }
 
 
-export { drawBoard, drawStorageBoard, getSource }
+export { getSource, draw }

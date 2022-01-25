@@ -1,8 +1,9 @@
 
 import { Board, StorageBoard } from "./board.js";
-import { drawStorageBoard, drawBoard, getSource } from "./ui.js"
+
 import { boardType } from "./enumboard.js"
 import { Piece } from "./enumpieces.js"
+import { draw, getSource } from "./ui.js"
 /*
 functie pickup 
 check holding === false 
@@ -16,17 +17,14 @@ zoja drop piece op de plek, en verwijder piece van bron
 */
 
 
+
 //setup board and storage
 let board = new Board(8, 8)
 board.generateRandomPosition()
 let storage = new StorageBoard()
 let holdingPiece = false
 
-//shit
-function drawLevel() {
-    drawStorageBoard(storage)
-    drawBoard(board)
-}
+
 
 //assumes good source (cursor on valid board)
 function pickup(source) {
@@ -34,7 +32,6 @@ function pickup(source) {
     let i = source[1]
     let j = source[2]
     if (holdingPiece === false && sourceBoard.get(i, j) !== Piece.empty) {
-        console.log("picking up piece: ", sourceBoard.get(i, j))
         holdingPiece = source
     }
 }
@@ -51,7 +48,7 @@ function drop(destination) {
 
         destinationBoard.put(id, jd, sourceBoard.get(is, js))  //put in destination
         sourceBoard.put(is, js, Piece.empty)                   //drop from source
-
+        draw(board, storage)
         holdingPiece = false
         return true
 
@@ -60,18 +57,18 @@ function drop(destination) {
 
 let body = document.querySelector("body")
 body.onclick = function (e) {
-    // console.log("x: ", e.clientX, "y: ", e.clientY)
-    // console.log(getSource(e.clientX, e.clientY))
-
-    drawLevel()
+    console.log("CLICKED")
+    // drawLevel()
     let source = getSource(e.clientX, e.clientY)
     if (source[0] === null) {
         return
     }
-    if (holdingPiece !== false) {
+    if (holdingPiece !== false) { //er word geklikt en er is al een piece vastgehouden
+        console.log("dropping piece")
         drop(source)
     }
-    if (holdingPiece === false) {
+    else if (holdingPiece === false) { //er word geklikt en we houden geen piece vast
+        console.log("picking up piece")
         pickup(source)
     }
 
