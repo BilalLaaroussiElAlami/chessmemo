@@ -10,8 +10,10 @@ const Piece = {
     wn: "wn",
     wp: "wp",
     wq: "wq",
-    wr: "wr"
+    wr: "wr",
+    empty: "empty"
 }
-for (let p in Piece) {
-    console.log(p)
-}
+// for (let p in Piece) {
+//     console.log(p)
+// }
+export { Piece }

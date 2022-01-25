@@ -1,4 +1,4 @@
-
+import { Piece } from "./enumpieces.js"
 class Board {
     constructor(rows, columns) {
         this.rows = rows;
@@ -30,10 +30,10 @@ class Board {
     }
 
     generateRandomPosition() {
-        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr"]; //if this changes enumpieces must be changed as well! 
+        let pieces = ["bb", "bk", "bn", "bp", "bq", "br", "wb", "wk", "wn", "wp", "wq", "wr", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty]; //if this changes enumpieces must be changed as well! 
         this.foreach(
             (i, j) => {
-                let piece = pieces[Math.round(Math.random() * 11)];
+                let piece = pieces[Math.round(Math.random() * (pieces.length - 1))];
                 this.put(i, j, piece)
 
 
@@ -104,5 +104,6 @@ class StorageBoard extends Board {
     }
 }
 
+export { Board, StorageBoard }
 
 

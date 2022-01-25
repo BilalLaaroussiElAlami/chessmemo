@@ -1,9 +1,12 @@
+import { Piece } from "./enumpieces.js"
+import { boardType } from "./enumboard.js"
+import { Board, StorageBoard } from "./board.js"
 
 var canvasback
-var ctxback //main board background
+var ctxback  //main board background
 
 var canvasstorage
-var ctxstorage //storage board background
+var ctxstorage//storage board background
 
 //draw picture chess board on background canvas
 function drawboardbackground() {
@@ -19,18 +22,20 @@ window.onload = function () {
     setupContext()
     drawboardbackground()
     drawStorageBackground()
-    UItest()
+    //UItest()
+
 
 }
 function setupContext() {
-    this.canvasback = document.getElementById("background");
-    this.ctxback = canvasback.getContext("2d");
-    this.canvasstorage = document.getElementById("storage");
-    this.ctxstorage = canvasstorage.getContext("2d")
+    canvasback = document.getElementById("background");
+    ctxback = canvasback.getContext("2d");
+    canvasstorage = document.getElementById("storage");
+    ctxstorage = canvasstorage.getContext("2d")
 
 }
 
-drawPiece = function (ctx, piece, i, j) {
+function drawPiece(ctx, piece, i, j) {
+    if (piece === Piece.empty) { return }
     let square_size = canvasback.width / 8     //hard coded 8 --> hard coded square-size, different sizes of peices not possible
     let img = document.getElementById(piece)
     let x = j * square_size
@@ -55,8 +60,8 @@ function drawStorageBoard(board) {
 
 function UItest() {
     console.log("BEGIN UI TEST")
-    console.log("ctxback: ", this.ctxback)
-    console.log("ctxstorage: ", this.ctxstorage)
+    console.log("ctxback: ", ctxback)
+    console.log("ctxstorage: ", ctxstorage)
     var b = new Board(8, 8)
     b.generateRandomPosition()
     drawBoard(b)
@@ -75,15 +80,30 @@ function getSource(x, y) {
     let board = document.getElementById("background")
     let rect = board.getBoundingClientRect();
 
+    let storage = document.getElementById("storage")
+    let rectstorage = storage.getBoundingClientRect()
+
     if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
         let relativeX = x - rect.left
         let relativeY = y - rect.top
         let j = Math.floor((relativeX / rect.width) * 8) //hard coded 8
         let i = Math.floor((relativeY / rect.height) * 8) //hard coded 8
-        return ["board", i, j]
+        return [boardType.board, i, j]
+
+    }
+    if (x >= rectstorage.left && x <= rectstorage.right && y >= rectstorage.top && y <= rectstorage.bottom) {
+        console.log("ok")
+        let relativeX = x - rectstorage.left
+        let relativeY = y - rectstorage.top
+        let j = Math.floor((relativeX / rectstorage.width) * 8) //hard coded 8
+        let i = Math.floor((relativeY / rectstorage.height) * 4) //hard coded 4
+        return [boardType.storage, i, j]
 
     }
     else {
-        return null
+        return [null, -1, -1]
     }
 }
+
+
+export { drawBoard, drawStorageBoard, getSource }
