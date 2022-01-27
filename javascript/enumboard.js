@@ -3,4 +3,6 @@ const boardType = {
     storage: "storage"
 }
 
+console.log("2")
+
 export { boardType }

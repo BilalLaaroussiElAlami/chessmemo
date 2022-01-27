@@ -16,4 +16,6 @@ const Piece = {
 // for (let p in Piece) {
 //     console.log(p)
 // }
+
+console.log("3")
 export { Piece }
