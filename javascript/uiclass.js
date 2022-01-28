@@ -1,6 +1,7 @@
 import { Piece } from "./enumpieces.js"
 import { boardType } from "./enumboard.js"
 import { Board, StorageBoard } from "./board.js"
+import { arrayEquals } from "./help.js"
 
 class UI {
     constructor() {
@@ -69,7 +70,7 @@ class UI {
     drawPieceEther(piece, x, y) {
         this.ctxether.clearRect(0, 0, this.ctxether.canvas.width, this.ctxether.canvas.width) //remove for cool effect
         let img = document.getElementById(piece)
-        this.ctxether.drawImage(img, (x - 37), (y - 37), 83, 83)
+        this.ctxether.drawImage(img, (x - 37), (y - 37), 80, 80)
     }
 
     drawGenericBoard(board, ctx) {
@@ -145,7 +146,7 @@ class UI {
 
     handleClick(e) {
         let placeClick = this.getSource(e.clientX, e.clientY)
-        if (placeClick !== [null, -1, -1]) {
+        if (!arrayEquals(placeClick, [null, -1, -1])) {
             this.level.click(placeClick)
         }
     }

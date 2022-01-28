@@ -2,12 +2,12 @@ Todo
 UI
 2 canvases one for board, one for storing pieces -DONE
 Draw Board -DONE
-Draw Stored pieces
-clicking and dragging
+Draw Stored pieces -DONE
+clicking and dragging -DONE
 
 
 
 LOGIC
-Board class -DONE
+Board class -DONE 
 Api chess positions 
 Game logic

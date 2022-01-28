@@ -6,6 +6,13 @@ function crunch(array, filterfun, length, padelement) {
     return res
 }
 
+function arrayEquals(a, b) {
+    return Array.isArray(a) &&
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((val, index) => val === b[index]);
+}
+
 console.log("1")
 
-export { crunch }
+export { crunch, arrayEquals }

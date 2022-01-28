@@ -28,15 +28,14 @@ aantal seconden om bord te reconstrueren
 */
 
 class Level {
-    constructor(setupArray, removeArray, time_see, time_reconstruct) {
+    constructor(setupArray, time_see, time_reconstruct) {
         this.board = new Board(8, 8)
         this.board.fill(setupArray)
-        this.board.display()
+
 
         this.storage = new StorageBoard()
         this.storage.makeFullStorageBoard()
-        this.storage.display()
-        //     this.storage.fillFromLargerArray(removeArray)
+
 
         this.time_see = time_see
         this.time_reconstruct = time_reconstruct
@@ -46,6 +45,19 @@ class Level {
         this.ui = null
     }
 
+    //exepcted toRemovePieces array of 0s and 1s
+    removePieces(toRemovePieces) {
+
+
+        //kinda breaking abstraction by accesing taking the arr variable
+        let storage = this.board.removePieces(toRemovePieces)
+        this.storage = storage
+
+
+        console.log("storage after removing")
+        this.storage.display()
+
+    }
 
     setUI(ui) {
         this.ui = ui
@@ -75,28 +87,19 @@ class Level {
     }
 
 
-
-
     click(placeClick) {
-        console.log("CLICKED")
-        // drawLevel()
-
-        if (this.holdingPiece !== false) { //er word geklikt en er is al een piece vastgehouden
-            console.log("dropping piece")
+        if (this.holdingPiece !== false) { //er word geklikt en er is al een piece vastgehouden        
             this.drop(placeClick)
         }
         else if (this.holdingPiece === false) { //er word geklikt en we houden geen piece vast
-            console.log("picking up piece")
+
             this.pickup(placeClick)
         }
-
     }
-
 
 
     //MouseMovement
     handleMouseMove(x, y) {
-        //console.log("mouse location:", e.clientX, e.clientY)
         if (this.holdingPiece !== false) {
             this.ui.drawPieceEther(this.holdingPiece, x, y)
         }
@@ -105,6 +108,7 @@ class Level {
 }
 
 console.log("6")
+
 
 export { Level }
 

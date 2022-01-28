@@ -82,6 +82,31 @@ class Board {
         this.foreach((i, j) => (console.log("i: ", i, "j: ", j)))
     }
 
+    //exepcted: toRemovePieces array of 0s and 1s, 1 means that at that index in board that piece must be removed
+    //does manipulate board to remove the pieces
+    //returns a storageboard of pieces that where removed
+    removePieces(toRemovePieces) {
+        console.log("to remove pieces")
+        console.log(toRemovePieces)
+        let removedPieces =
+            this.arr.filter(
+                (el, i) => {
+                    return (toRemovePieces[i] === 1)
+                })
+        console.log("removed pieces")
+        console.log(removedPieces)
+        this.arr = this.arr.map(
+            (e, i) => {
+                return (toRemovePieces[i] === 1) ? Piece.empty : e
+            })
+
+
+
+        let storage = new StorageBoard()
+        storage.fillFromBiggerOrSmallerArray(removedPieces)
+        return storage
+    }
+
 
 }
 
@@ -104,15 +129,17 @@ class StorageBoard extends Board {
         )
     }
 
-    //could be that array is bigger than dimension, first we filter
-    fillFromLargerArray(input_arr) {
+    //could be that array is bigger or smaller than  the dimensions (extra empty pieces), first we filter
+    fillFromBiggerOrSmallerArray(input_arr) {
         let filteredArray = crunch(input_arr, (piece) => piece !== Piece.empty, this.rows * this.columns, Piece.empty)
         this.fill(filteredArray)
     }
+
+
 }
 
 // let s = new StorageBoard()
-// s.fillFromLargerArray([
+// s.fillFromBiggerOrSmallerArray([
 //     "bn",
 //     Piece.empty, "bn", "bb", "bq", "bk", "bb", "bn", "br",
 //     "bp", "bp", "bp", Piece.empty, "bp", "bp", "bp", "bp",
@@ -120,6 +147,8 @@ class StorageBoard extends Board {
 //     "wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"
 // ])
 // s.display()
+
+
 
 console.log("4")
 
