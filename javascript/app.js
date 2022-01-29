@@ -5,37 +5,29 @@ import { Piece } from "./enumpieces.js"
 console.log("7")
 
 let setupArray = [
-    "br", "bb", "bn", "bq", "bk", "bb", "bn", "br",
-    "bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp",
-    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
-    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
-    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
-    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
-    "wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp",
-    "wr", "wb", "wn", "wq", "wk", "wb", "wn", "wr",
+    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bb",
+    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bp", "bk", "bp",
+    Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bb", Piece.empty, "bp", Piece.empty,
+    Piece.empty, Piece.empty, "wq", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+    Piece.empty, Piece.empty, Piece.empty, "wp", Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+    "wp", Piece.empty, "bq", Piece.empty, "wn", Piece.empty, Piece.empty, Piece.empty,
+    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wp", "wp", "wp",
+    Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wr", "wk", "wp",
+
 
 
 ]
 
-let toRemovePieces = [
-    1, 1, 1, 0, 1, 1, 0, 1,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    1, 0, 0, 0, 0, 0, 1, 0,
-    0, 0, 0, 1, 0, 0, 0, 0,
-]
+let toRemovePieces = setupArray.map((el => 1))
 
 
-let time_see = 5000
-let time_reconstruct = 30000
+let time_see = 30000
+let time_reconstruct = 300000
 
 
 let ui = new UI()
 
-let level1 = new Level(setupArray, toRemovePieces)
+let level1 = new Level(setupArray, toRemovePieces, time_see, time_reconstruct)
 
 
 ui.setlevel(level1)

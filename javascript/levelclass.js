@@ -28,18 +28,29 @@ aantal seconden om bord te reconstrueren
 */
 
 class Level {
-    constructor(setupArray, toRemovePieces) {
+    constructor(setupArray, toRemovePieces, time_see, time_reconstruct) {
         this.verifyboard = new Board(8, 8)
         this.verifyboard.fill(setupArray)
 
         this.currentboard = new Board(8, 8)
         this.currentboard.fill(setupArray)
 
-        this.storage = this.currentboard.removePieces(toRemovePieces)
+        this.toRemovePieces = toRemovePieces
+
+        // this.storage = this.currentboard.removePieces(toRemovePieces) //remember removePieces on board! and returns a storageBoard
+        this.storage = new StorageBoard()
 
         this.holdingPiece = false
 
         this.ui = null
+
+        window.setTimeout(this.removePieces.bind(this), time_see)
+        window.setTimeout(() => alert("game over"), time_reconstruct + time_see)
+    }
+
+    removePieces() {
+        this.storage = this.currentboard.removePieces(this.toRemovePieces)
+        this.drawLevel()
     }
 
 
@@ -61,8 +72,8 @@ class Level {
 
     uiLoaded() {
         this.drawLevel()
-    }
 
+    }
     //assumes good source (cursor on valid board)
     pickup(source) {
         let pickupBoard = (source[0] === boardType.board) ? this.currentboard : this.storage

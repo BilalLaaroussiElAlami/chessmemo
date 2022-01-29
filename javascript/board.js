@@ -119,7 +119,11 @@ class StorageBoard extends Board {
         super(4, 8);
         this.rows = 4
         this.columns = 8
-        this.makeFullStorageBoard()
+        this.makeEmptyStorageBoard()
+    }
+
+    makeEmptyStorageBoard() {
+        this.fill(Array(this.rows * this.columns).fill(Piece.empty))
     }
 
     makeFullStorageBoard() {
