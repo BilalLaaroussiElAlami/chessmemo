@@ -14,7 +14,7 @@ class UI {
         this.canvasether = null
         this.ctxether = null
 
-        window.onload = this.setup.bind(this)
+        window.onload = () => { this.setup(); this.level.uiLoaded() }
 
         this.body = document.querySelector("body")
         this.body.onclick = this.handleClick.bind(this)
@@ -96,6 +96,9 @@ class UI {
     }
 
 
+    // drawLevel(level) {
+    //     this.draw(level.board, level.storageBoard)
+    // }
 
     UItest() {
         console.log("BEGIN UI TEST")

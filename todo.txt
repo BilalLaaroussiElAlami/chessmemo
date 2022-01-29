@@ -11,3 +11,5 @@ LOGIC
 Board class -DONE 
 Api chess positions 
 Game logic
+
+I want a function play(level)

@@ -28,13 +28,15 @@ let toRemovePieces = [
     0, 0, 0, 1, 0, 0, 0, 0,
 ]
 
+
 let time_see = 5000
 let time_reconstruct = 30000
 
 
 let ui = new UI()
-let level1 = new Level(setupArray, time_see, time_reconstruct)
-level1.removePieces(toRemovePieces)
+
+let level1 = new Level(setupArray, toRemovePieces)
+
 
 ui.setlevel(level1)
 level1.setUI(ui)

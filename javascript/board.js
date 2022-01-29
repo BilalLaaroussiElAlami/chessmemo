@@ -1,5 +1,5 @@
 import { Piece } from "./enumpieces.js"
-import { crunch } from "./help.js"
+import { crunch, arrayEquals } from "./help.js"
 class Board {
     constructor(rows, columns) {
         this.rows = rows;
@@ -107,6 +107,10 @@ class Board {
         return storage
     }
 
+
+    equals(otherBoard) {
+        return arrayEquals(this.arr, otherBoard.arr)
+    }
 
 }
 

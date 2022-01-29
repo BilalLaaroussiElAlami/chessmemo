@@ -28,61 +28,62 @@ aantal seconden om bord te reconstrueren
 */
 
 class Level {
-    constructor(setupArray, time_see, time_reconstruct) {
-        this.board = new Board(8, 8)
-        this.board.fill(setupArray)
+    constructor(setupArray, toRemovePieces) {
+        this.verifyboard = new Board(8, 8)
+        this.verifyboard.fill(setupArray)
 
+        this.currentboard = new Board(8, 8)
+        this.currentboard.fill(setupArray)
 
-        this.storage = new StorageBoard()
-        this.storage.makeFullStorageBoard()
-
-
-        this.time_see = time_see
-        this.time_reconstruct = time_reconstruct
+        this.storage = this.currentboard.removePieces(toRemovePieces)
 
         this.holdingPiece = false
 
         this.ui = null
     }
 
-    //exepcted toRemovePieces array of 0s and 1s
-    removePieces(toRemovePieces) {
 
-
-        //kinda breaking abstraction by accesing taking the arr variable
-        let storage = this.board.removePieces(toRemovePieces)
-        this.storage = storage
-
-
-        console.log("storage after removing")
-        this.storage.display()
-
+    islevelFinished() {
+        let done = this.verifyboard.equals(this.currentboard)
+        if (done) {
+            alert("DONE")
+            return done
+        }
     }
 
+
+    drawLevel() {
+        this.ui.draw(this.currentboard, this.storage)
+    }
     setUI(ui) {
         this.ui = ui
     }
+
+    uiLoaded() {
+        this.drawLevel()
+    }
+
     //assumes good source (cursor on valid board)
     pickup(source) {
-        let pickupBoard = (source[0] === boardType.board) ? this.board : this.storage
+        let pickupBoard = (source[0] === boardType.board) ? this.currentboard : this.storage
         let i = source[1]
         let j = source[2]
-        if (this.holdingPiece === false && pickupBoard.get(i, j) !== Piece.empty) {
+        if (pickupBoard.get(i, j) !== Piece.empty) {
             this.holdingPiece = pickupBoard.get(i, j)
             pickupBoard.put(i, j, Piece.empty)
-            this.ui.draw(this.board, this.storage)
+            this.drawLevel()
         }
     }
     //assumes good source (cursor on valid board)
     drop(destination) {
-        let destinationBoard = (destination[0] === boardType.board) ? this.board : this.storage
+        let destinationBoard = (destination[0] === boardType.board) ? this.currentboard : this.storage
         let id = destination[1]
         let jd = destination[2]
-
-        if (this.holdingPiece !== false && destinationBoard.get(id, jd) === Piece.empty) {
+        if (destinationBoard.get(id, jd) === Piece.empty) {
             destinationBoard.put(id, jd, this.holdingPiece)
             this.holdingPiece = false
-            this.ui.draw(this.board, this.storage)
+            this.drawLevel()
+            this.islevelFinished()
         }
     }
 
@@ -92,7 +93,6 @@ class Level {
             this.drop(placeClick)
         }
         else if (this.holdingPiece === false) { //er word geklikt en we houden geen piece vast
-
             this.pickup(placeClick)
         }
     }
