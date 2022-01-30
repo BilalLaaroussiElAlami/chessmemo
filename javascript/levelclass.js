@@ -44,6 +44,9 @@ class Level {
 
         this.ui = null
 
+        this.time_see = time_see
+        this.time_reconstruct = time_reconstruct
+
         window.setTimeout(this.removePieces.bind(this), time_see)
         window.setTimeout(() => alert("game over"), time_reconstruct + time_see)
     }
@@ -73,6 +76,8 @@ class Level {
     uiLoaded() {
         this.drawLevel()
 
+        this.ui.countback(this.time_see, this.time_reconstruct)
+
     }
     //assumes good source (cursor on valid board)
     pickup(source) {
@@ -98,6 +103,14 @@ class Level {
         }
     }
 
+    dropPiece(destination, piece) {
+        let destinationBoard = (destination[0] === boardType.board) ? this.currentboard : this.storage
+        let id = destination[1]
+        let jd = destination[2]
+        destinationBoard.put(id, jd, piece)
+        this.drawLevel()
+    }
+
 
     click(placeClick) {
         if (this.holdingPiece !== false) { //er word geklikt en er is al een piece vastgehouden        
@@ -115,6 +128,32 @@ class Level {
             this.ui.drawPieceEther(this.holdingPiece, x, y)
         }
     }
+
+    mapKeyPiece = new Map([
+        ["k", "wk"],
+        ["q", "wq"],
+        ["r", "wr"],
+        ["b", "wb"],
+        ["n", "wn"],
+        ["p", "wp"],
+
+        ["K", "bk"],
+        ["Q", "bq"],
+        ["R", "br"],
+        ["B", "bb"],
+        ["N", "bn"],
+        ["P", "bp"],
+
+        ["e", Piece.empty],
+        ["E", Piece.empty]
+    ]);
+
+    keyPress(key, destination) {
+        console.log(key)
+        console.log(destination)
+        this.dropPiece(destination, this.mapKeyPiece.get(key))
+    }
+
 
 }
 

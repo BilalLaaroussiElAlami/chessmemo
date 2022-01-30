@@ -22,8 +22,44 @@ class UI {
         this.level = null
 
         document.onmousemove = this.handleMouseMove.bind(this)
+
+        window.onkeydown = this.handleKeyPress.bind(this)
+
+        this.cursorX = null
+        this.cursorY = null
+
+        this.timeMillis = null
     }
 
+
+
+    countback(time_see, time_reconstruct) {
+
+        console.log("aaaaaa", time_reconstruct)
+        this.timeMillis = time_see
+
+        let delta = 1000
+        let done_seeing = false
+
+        let see_interval = window.setInterval(
+            () => {
+                this.timeMillis = this.timeMillis - delta
+                document.getElementById("timer").innerHTML = Math.floor((this.timeMillis / 1000))
+                if (this.timeMillis <= 0) {
+                    this.timeMillis = time_reconstruct
+                    done_seeing = true
+                }
+                if (done_seeing === true && this.timeMillis <= 0) {
+                    clearInterval(see_interval)
+                }
+            }
+            ,
+            delta)
+
+
+
+
+    }
 
     setlevel(level) {
         this.level = level
@@ -142,22 +178,79 @@ class UI {
 
         }
         else {
-            return [null, -1, -1]
+            return null
         }
     }
 
 
     handleClick(e) {
         let placeClick = this.getSource(e.clientX, e.clientY)
-        if (!arrayEquals(placeClick, [null, -1, -1])) {
+        if (placeClick !== null) {
             this.level.click(placeClick)
         }
     }
 
     handleMouseMove(e) {
-        this.level.handleMouseMove(e.clientX, e.clientY)
+        this.cursorX = e.clientX
+        this.cursorY = e.clientY
+        this.level.handleMouseMove(this.cursorX, this.cursorY)
+    }
+
+
+
+
+    /*  max_delta = 500
+      lastKeyPressed = ''
+      last_time = new Date()
+     
+      handleKeyPress(e) {
+          let currentKeyPressed = e.key
+          let currentTime = new Date()
+     
+          console.log(currentTime - this.last_time)
+     
+          if (currentKeyPressed === this.lastKeyPressed) {
+              let delta = currentTime - this.last_time
+              if (delta < this.max_delta) {
+     
+                  this.doubleKeyPress(currentKeyPressed)
+              }
+          }
+          else {
+              this.singleKeyPressed(currentKeyPressed)
+          }
+     
+          this.last_time = currentTime
+          this.lastKeyPressed = currentKeyPressed
+      }
+     
+      doubleKeyPress(key) {
+          console.log("double press: ", key)
+      }
+     
+      singleKeyPressed(key) {
+          console.log("single press: ", key)
+      }
+      */
+
+    //legal key presses: k --> white king, K --> black king, r --> rook, R --> black rook
+    possibleKeyPresses = ['p', 'r', 'b', 'n', 'q', 'k', 'P', 'R', 'B', 'N', 'Q', 'K', "e"]
+
+    handleKeyPress(e) {
+        let key = e.key
+        let placeClick = this.getSource(this.cursorX, this.cursorY)
+        //console.log(placeClick)
+        if (this.possibleKeyPresses.includes(key)) {
+            // console.log("placeclick ", placeClick)
+            // console.log("placeclick !== null", placeClick !== null)
+            if (placeClick !== null) {
+
+                this.level.keyPress(key, this.getSource(this.cursorX, this.cursorY))
+            }
+        }
     }
 }
+
 
 console.log("5")
 

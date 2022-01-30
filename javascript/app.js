@@ -21,8 +21,8 @@ let setupArray = [
 let toRemovePieces = setupArray.map((el => 1))
 
 
-let time_see = 30000
-let time_reconstruct = 300000
+let time_see = 10000
+let time_reconstruct = 60000
 
 
 let ui = new UI()

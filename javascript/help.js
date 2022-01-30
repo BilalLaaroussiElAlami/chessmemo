@@ -15,4 +15,7 @@ function arrayEquals(a, b) {
 
 console.log("1")
 
+let x = [null, -1, -1]
+let y = [null, -1, -1]
+console.log("x en y", arrayEquals(x, y))
 export { crunch, arrayEquals }

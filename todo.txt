@@ -8,8 +8,11 @@ clicking and dragging -DONE
 
 
 LOGIC
-Board class -DONE 
-Api chess positions 
-Game logic
+game class multiple levels 
+ui with key presses - DONE
+ui timers 
+keep score
+modes 
+
 
 I want a function play(level)
