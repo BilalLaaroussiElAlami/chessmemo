@@ -29,9 +29,14 @@ display: none
 } 
 
 #timer{
-    width: 1000px;
-    height: 1000px;
-    size: 300px;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    display: inline-flex;
+    width:  200px;
+    height: 70px;
+    font-size: 50px;
 }
 
 body{

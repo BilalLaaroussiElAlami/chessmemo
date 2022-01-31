@@ -86,21 +86,16 @@ class Board {
     //does manipulate board to remove the pieces
     //returns a storageboard of pieces that where removed
     removePieces(toRemovePieces) {
-        console.log("to remove pieces")
-        console.log(toRemovePieces)
         let removedPieces =
             this.arr.filter(
                 (el, i) => {
                     return (toRemovePieces[i] === 1)
                 })
-        console.log("removed pieces")
-        console.log(removedPieces)
+
         this.arr = this.arr.map(
             (e, i) => {
                 return (toRemovePieces[i] === 1) ? Piece.empty : e
             })
-
-
 
         let storage = new StorageBoard()
         storage.fillFromBiggerOrSmallerArray(removedPieces)

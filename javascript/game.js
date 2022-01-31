@@ -28,17 +28,21 @@ class Game {
     exitLevel(status) {
         if (status === "win") {
             this.wins++
+            alert("you won this level")
         }
         else if (status === "loss") {
             this.losses++
+            alert("you lost this level")
         }
 
-        this.currentLevelIndex++
-        if (this.currentLevelIndex === this.levels.length) {
-            exitgame()
+        console.log("this.currentLevelIndex", this.currentLevelIndex)
+        console.log("this.levels.length", this.levels.length)
+        if (this.currentLevelIndex === this.levels.length - 1) {
+            this.exitgame()
             return
         }
         else {
+            this.currentLevelIndex++
             this.currentLevel = this.levels[this.currentLevelIndex]
             this.betweenlevels()
             this.startCurrentLevel()
@@ -51,7 +55,7 @@ class Game {
     }
 
     exitgame() {
-        // alert("done game")
+        alert("Thank you for playing my game! \n Any feedback would be greatly appreciated. \n Refresh te site to restart the game")
     }
 
 }

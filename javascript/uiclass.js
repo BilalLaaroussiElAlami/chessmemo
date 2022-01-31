@@ -34,7 +34,6 @@ class UI {
     }
 
     countback(time_see, time_reconstruct) {
-        console.log("aaaaaa", time_reconstruct)
         this.timeMillis = time_see
 
         let delta = 1000
@@ -198,12 +197,9 @@ class UI {
     handleKeyPress(e) {
         let key = e.key
         let placeClick = this.getSource(this.cursorX, this.cursorY)
-        //console.log(placeClick)
-        if (this.possibleKeyPresses.includes(key)) {
-            // console.log("placeclick ", placeClick)
-            // console.log("placeclick !== null", placeClick !== null)
-            if (placeClick !== null) {
 
+        if (this.possibleKeyPresses.includes(key)) {
+            if (placeClick !== null) {
                 this.level.keyPress(key, this.getSource(this.cursorX, this.cursorY))
             }
         }

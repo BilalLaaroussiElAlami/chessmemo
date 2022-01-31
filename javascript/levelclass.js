@@ -79,8 +79,8 @@ class Level {
         this.drawLevel()
     }
     removePieces() {
-        console.log("called")
         this.storage = this.currentboard.removePieces(this.toRemovePieces)
+        this.currentboard.display()
         this.drawLevel()
     }
 
