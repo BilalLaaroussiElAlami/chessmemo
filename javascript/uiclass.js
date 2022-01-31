@@ -1,8 +1,8 @@
 import { Piece } from "./enumpieces.js"
 import { boardType } from "./enumboard.js"
 import { Board, StorageBoard } from "./board.js"
-import { arrayEquals } from "./help.js"
 
+//should be constructed after window is loaded!!!
 class UI {
     constructor() {
         this.canvasback = null
@@ -14,7 +14,6 @@ class UI {
         this.canvasether = null
         this.ctxether = null
 
-        window.onload = () => { this.setup(); this.level.uiLoaded() }
 
         this.body = document.querySelector("body")
         this.body.onclick = this.handleClick.bind(this)
@@ -29,12 +28,12 @@ class UI {
         this.cursorY = null
 
         this.timeMillis = null
+
+        this.setup(); //assumes window is loaded
+
     }
 
-
-
     countback(time_see, time_reconstruct) {
-
         console.log("aaaaaa", time_reconstruct)
         this.timeMillis = time_see
 
@@ -55,10 +54,6 @@ class UI {
             }
             ,
             delta)
-
-
-
-
     }
 
     setlevel(level) {
@@ -197,42 +192,6 @@ class UI {
     }
 
 
-
-
-    /*  max_delta = 500
-      lastKeyPressed = ''
-      last_time = new Date()
-     
-      handleKeyPress(e) {
-          let currentKeyPressed = e.key
-          let currentTime = new Date()
-     
-          console.log(currentTime - this.last_time)
-     
-          if (currentKeyPressed === this.lastKeyPressed) {
-              let delta = currentTime - this.last_time
-              if (delta < this.max_delta) {
-     
-                  this.doubleKeyPress(currentKeyPressed)
-              }
-          }
-          else {
-              this.singleKeyPressed(currentKeyPressed)
-          }
-     
-          this.last_time = currentTime
-          this.lastKeyPressed = currentKeyPressed
-      }
-     
-      doubleKeyPress(key) {
-          console.log("double press: ", key)
-      }
-     
-      singleKeyPressed(key) {
-          console.log("single press: ", key)
-      }
-      */
-
     //legal key presses: k --> white king, K --> black king, r --> rook, R --> black rook
     possibleKeyPresses = ['p', 'r', 'b', 'n', 'q', 'k', 'P', 'R', 'B', 'N', 'Q', 'K', "e"]
 
@@ -251,10 +210,7 @@ class UI {
     }
 }
 
-
 console.log("5")
-
-
 
 export { UI }
 

@@ -47,22 +47,61 @@ class Level {
         this.time_see = time_see
         this.time_reconstruct = time_reconstruct
 
-        window.setTimeout(this.removePieces.bind(this), time_see)
-        window.setTimeout(() => alert("game over"), time_reconstruct + time_see)
+        this.canManipulate = false
+
+        this.win = false
+
+        this.game = null
     }
 
+    setGame(game) {
+        this.game = game
+    }
+
+    play() {
+        //removes pieces once time_see is up, since then the user is allowed to manipulate the board
+        window.setTimeout(
+            () => {
+                this.canManipulate = true;
+                this.removePieces()
+            }
+            , this.time_see) //na time_see milliseconden moeten de pieces weggehaald worden en kan pieces worden opgepakt/gedropt
+
+        //calls gameover once time is up
+        window.setTimeout(
+            () => {
+                if (this.win === false) {
+                    this.failedLevel()
+                }
+            },
+            this.time_reconstruct + this.time_see) //
+        this.ui.countback(this.time_see, this.time_reconstruct)
+        this.drawLevel()
+    }
     removePieces() {
+        console.log("called")
         this.storage = this.currentboard.removePieces(this.toRemovePieces)
         this.drawLevel()
     }
 
 
-    islevelFinished() {
-        let done = this.verifyboard.equals(this.currentboard)
-        if (done) {
-            alert("DONE")
-            return done
+    isLevelWon() {
+        let won = this.verifyboard.equals(this.currentboard)
+        if (won) {
+            this.wonLevel()
         }
+    }
+
+    wonLevel() {
+        // alert("SIIIIIUUUUUHH")
+        this.game.exitLevel("win")
+
+    }
+
+
+    failedLevel() {
+        // alert("NOOOOOOO")
+        this.game.exitLevel("loss")
     }
 
 
@@ -73,14 +112,16 @@ class Level {
         this.ui = ui
     }
 
-    uiLoaded() {
-        this.drawLevel()
 
-        this.ui.countback(this.time_see, this.time_reconstruct)
+    // //Once UI is loaded the level starts
+    // uiLoaded() {
+    //     this.play()
+    // }
 
-    }
+
     //assumes good source (cursor on valid board)
     pickup(source) {
+        if (this.canManipulate === false) { return }
         let pickupBoard = (source[0] === boardType.board) ? this.currentboard : this.storage
         let i = source[1]
         let j = source[2]
@@ -92,6 +133,7 @@ class Level {
     }
     //assumes good source (cursor on valid board)
     drop(destination) {
+        if (this.canManipulate === false) { return }
         let destinationBoard = (destination[0] === boardType.board) ? this.currentboard : this.storage
         let id = destination[1]
         let jd = destination[2]
@@ -99,16 +141,18 @@ class Level {
             destinationBoard.put(id, jd, this.holdingPiece)
             this.holdingPiece = false
             this.drawLevel()
-            this.islevelFinished()
+            this.isLevelWon()
         }
     }
 
     dropPiece(destination, piece) {
+        if (this.canManipulate === false) { return }
         let destinationBoard = (destination[0] === boardType.board) ? this.currentboard : this.storage
         let id = destination[1]
         let jd = destination[2]
         destinationBoard.put(id, jd, piece)
         this.drawLevel()
+        this.isLevelWon()
     }
 
 
@@ -149,8 +193,6 @@ class Level {
     ]);
 
     keyPress(key, destination) {
-        console.log(key)
-        console.log(destination)
         this.dropPiece(destination, this.mapKeyPiece.get(key))
     }
 
