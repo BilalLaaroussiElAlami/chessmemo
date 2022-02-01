@@ -55,7 +55,7 @@ class Game {
     }
 
     exitgame() {
-        alert("Thank you for playing my game! \n Any feedback would be greatly appreciated. \n Refresh te site to restart the game")
+        alert("Thank you for playing my game! \nAny feedback would be greatly appreciated.\nRefresh te site to restart the game")
     }
 
 }
