@@ -10,6 +10,32 @@ let levels =
     [
         new Level(
             [
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bk",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wk",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                "wp", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+            ],
+            [
+                0, 0, 0, 0, 0, 0, 0, 1,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                1, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,],
+            10000,
+            10000
+
+
+        ),
+
+        new Level(
+            [
                 Piece.empty, Piece.empty, "wk", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
                 Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wq", Piece.empty,
                 Piece.empty, Piece.empty, Piece.empty, "bk", Piece.empty, Piece.empty, Piece.empty, Piece.empty,
@@ -102,8 +128,8 @@ let levels =
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 1, 0, 0, 0, 0
             ],
-            standard_time_see,
-            time_reconstruct
+            15000,
+            10000
         ),
 
         new Level(
@@ -127,8 +153,8 @@ let levels =
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0
             ],
-            60000,
-            60000
+            30000,
+            30000
         ),
         new Level(
             [
