@@ -1,12 +1,35 @@
 import { Level } from "./levelclass.js"
 import { Piece } from "./enumpieces.js"
 
-let standard_time_see = 20000
-let time_reconstruct = 20000
+
+let standard_time_see = 5000
+let time_reconstruct = 5000
 
 let levels =
 
     [
+        new Level(
+            [
+                Piece.empty, Piece.empty, "wk", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wq", Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, "bk", Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "br"
+            ],
+            [0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 1],
+            30000,
+            20000
+        ),
         new Level(
             [
                 Piece.empty, "wk", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
@@ -29,8 +52,8 @@ let levels =
                 0, 1, 0, 0, 0, 0, 0, 0,
 
             ],
-            standard_time_see,
-            time_reconstruct
+            30000,
+            30000
         )
         ,
 
@@ -54,8 +77,8 @@ let levels =
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0
             ],
-            standard_time_see,
-            time_reconstruct
+            60000,
+            60000
         ),
 
         new Level(
@@ -85,6 +108,30 @@ let levels =
 
         new Level(
             [
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bk",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wb", Piece.empty, "bp", Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wp",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bp", Piece.empty, "wk",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bp",
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "wp",
+                "bp", Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty,
+                Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty
+            ],
+            [
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 1, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 1,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0
+            ],
+            60000,
+            60000
+        ),
+        new Level(
+            [
                 Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bb",
                 Piece.empty, Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bp", "bk", "bp",
                 Piece.empty, Piece.empty, Piece.empty, Piece.empty, "bb", Piece.empty, "bp", Piece.empty,
@@ -105,8 +152,8 @@ let levels =
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0
             ],
-            standard_time_see,
-            time_reconstruct),
+            60000,
+            60000),
 
 
 

@@ -15,5 +15,8 @@ function arrayEquals(a, b) {
 
 console.log("1")
 
+function update(progress) {
+    // Update the state of the world for the elapsed time since last render
+}
 
 export { crunch, arrayEquals }

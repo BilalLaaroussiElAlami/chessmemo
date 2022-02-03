@@ -209,6 +209,9 @@ class UI {
                 this.level.keyPress(key, this.getSource(this.cursorX, this.cursorY))
             }
         }
+        if (key == 's') {
+            this.level.skipWait()
+        }
     }
 }
 

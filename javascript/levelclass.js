@@ -52,6 +52,11 @@ class Level {
         this.win = false
 
         this.game = null
+
+        this.t1 = null
+        this.t2 = null
+
+        this.calledSkip = false
     }
 
     setGame(game) {
@@ -61,7 +66,7 @@ class Level {
     play() {
         this.ui.displaymemorise(this.time_see)
         //removes pieces once time_see is up, since then the user is allowed to manipulate the board
-        window.setTimeout(
+        this.t1 = window.setTimeout(
             () => {
                 this.canManipulate = true;
                 this.removePieces()
@@ -70,16 +75,33 @@ class Level {
             , this.time_see) //na time_see milliseconden moeten de pieces weggehaald worden en kan pieces worden opgepakt/gedropt
 
         //calls gameover once time is up
-        window.setTimeout(
+        this.t2 = window.setTimeout(
             () => {
                 if (this.win === false) {
                     this.failedLevel()
                 }
             },
             this.time_reconstruct + this.time_see) //
-        // this.ui.countback(this.time_see, this.time_reconstruct)
+
         this.drawLevel()
     }
+
+    clearThreads() {
+        window.clearTimeout(this.t1)
+        window.clearTimeout(this.t2)
+    }
+
+    skipWait() {
+        if (this.calledSkip === false) {
+            window.clearTimeout(this.t1)
+            this.canManipulate = true;
+            this.removePieces()
+            this.ui.displayreconstruct(this.time_reconstruct)
+        }
+        this.calledSkip = true
+    }
+
+
     removePieces() {
         this.storage = this.currentboard.removePieces(this.toRemovePieces)
         this.currentboard.display()
@@ -96,6 +118,8 @@ class Level {
 
     wonLevel() {
         // alert("SIIIIIUUUUUHH")
+        console.log("called wonlevel    ")
+        this.clearThreads()
         this.game.exitLevel("win")
 
     }
