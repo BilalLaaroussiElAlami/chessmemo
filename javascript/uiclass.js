@@ -33,27 +33,33 @@ class UI {
 
     }
 
-    countback(time_see, time_reconstruct) {
-        this.timeMillis = time_see
-
-        let delta = 1000
-        let done_seeing = false
-
-        let see_interval = window.setInterval(
-            () => {
-                this.timeMillis = this.timeMillis - delta
-                document.getElementById("timer").innerHTML = Math.floor((this.timeMillis / 1000))
-                if (this.timeMillis <= 0) {
-                    this.timeMillis = time_reconstruct
-                    done_seeing = true
-                }
-                if (done_seeing === true && this.timeMillis <= 0) {
-                    clearInterval(see_interval)
-                }
-            }
-            ,
-            delta)
+    displaymemorise(time) {
+        document.getElementById("txt").innerHTML = "memorise, you  got " + time / 1000 + " seconds"
     }
+    displayreconstruct(time) {
+        document.getElementById("txt").innerHTML = "reconstruct, you got " + time / 1000 + " seconds"
+    }
+    // countback(time_see, time_reconstruct) {
+    //     this.timeMillis = time_see
+
+    //     let delta = 1000
+    //     let done_seeing = false
+
+    //     let see_interval = window.setInterval(
+    //         () => {
+    //             this.timeMillis = this.timeMillis - delta
+    //             document.getElementById("timer").innerHTML = Math.floor((this.timeMillis / 1000))
+    //             if (this.timeMillis <= 0) {
+    //                 this.timeMillis = time_reconstruct
+    //                 done_seeing = true
+    //             }
+    //             if (done_seeing === true && this.timeMillis <= 0) {
+    //                 clearInterval(see_interval)
+    //             }
+    //         }
+    //         ,
+    //         delta)
+    // }
 
     setlevel(level) {
         this.level = level

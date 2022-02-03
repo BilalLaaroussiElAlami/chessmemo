@@ -44,7 +44,7 @@ class Board {
     //makes sure input array is same as array
     fill(input_arr) {
         if (input_arr.length !== this.arr.length) {
-            throw "DIMENSIONS NOT THE SAME ERROR"
+            throw `DIMENSIONS NOT THE SAME ERROR, REQUIRED ARRAY LENGTH: ${this.arr.length}, GIVEN ARRAY LENGTH: ${input_arr.length} `
         }
         //also need to check every element is valid piece
         else {

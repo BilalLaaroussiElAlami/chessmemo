@@ -59,11 +59,13 @@ class Level {
     }
 
     play() {
+        this.ui.displaymemorise(this.time_see)
         //removes pieces once time_see is up, since then the user is allowed to manipulate the board
         window.setTimeout(
             () => {
                 this.canManipulate = true;
                 this.removePieces()
+                this.ui.displayreconstruct(this.time_reconstruct)
             }
             , this.time_see) //na time_see milliseconden moeten de pieces weggehaald worden en kan pieces worden opgepakt/gedropt
 
@@ -75,7 +77,7 @@ class Level {
                 }
             },
             this.time_reconstruct + this.time_see) //
-        this.ui.countback(this.time_see, this.time_reconstruct)
+        // this.ui.countback(this.time_see, this.time_reconstruct)
         this.drawLevel()
     }
     removePieces() {
