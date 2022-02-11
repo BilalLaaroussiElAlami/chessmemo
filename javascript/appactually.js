@@ -7,6 +7,8 @@ import { UI } from "./uiclass.js";
 function main() {
 
     let ui = new UI()
+    let b = document.getElementById("readybtn")
+
     let game = new Game(levels, ui)
     game.setup()
     game.startGame()

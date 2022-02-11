@@ -2,6 +2,7 @@ import { Piece } from "./enumpieces.js"
 import { boardType } from "./enumboard.js"
 import { Board, StorageBoard } from "./board.js"
 
+
 //should be constructed after window is loaded!!!
 class UI {
     constructor() {
@@ -20,49 +21,66 @@ class UI {
 
         this.level = null
 
-        document.onmousemove = this.handleMouseMove.bind(this)
-
-        window.onkeydown = this.handleKeyPress.bind(this)
-
         this.cursorX = null
         this.cursorY = null
 
-        this.timeMillis = null
 
         this.setup(); //assumes window is loaded
 
+        this.timeMillis = "AAAAAAAAA"
+        this.countbackthread = null
+
+        document.onmousemove = this.handleMouseMove.bind(this)
+        window.onkeydown = this.handleKeyPress.bind(this)
+
+
+
+
+    }
+
+    linkReadyButtonToLevel() {
+        let btn = document.getElementById("readybtn")
+        btn.onclick = () => this.level.skipWait()
     }
 
     displaymemorise(time) {
-        document.getElementById("txt").innerHTML = "memorise, you  got " + time / 1000 + " seconds"
+        //document.getElementById("txt").innerHTML = "memorise, you  got " + time / 1000 + " seconds"
     }
     displayreconstruct(time) {
-        document.getElementById("txt").innerHTML = "reconstruct, you got " + time / 1000 + " seconds"
+        //document.getElementById("txt").innerHTML = "reconstruct, you got " + time / 1000 + " seconds"
     }
-    // countback(time_see, time_reconstruct) {
-    //     this.timeMillis = time_see
 
-    //     let delta = 1000
-    //     let done_seeing = false
 
-    //     let see_interval = window.setInterval(
-    //         () => {
-    //             this.timeMillis = this.timeMillis - delta
-    //             document.getElementById("timer").innerHTML = Math.floor((this.timeMillis / 1000))
-    //             if (this.timeMillis <= 0) {
-    //                 this.timeMillis = time_reconstruct
-    //                 done_seeing = true
-    //             }
-    //             if (done_seeing === true && this.timeMillis <= 0) {
-    //                 clearInterval(see_interval)
-    //             }
-    //         }
-    //         ,
-    //         delta)
-    // }
+    countback(time_see) {
+        let delta = 100
+        if (this.countbackthread !== null) { //als er al aan het countbacken is
+            window.clearTimeout(this.countbackthread)
+        }
+        this.timeMillis = time_see
+        this.countbackthread =
+            window.setInterval(
+                () => {
+                    this.timeMillis -= delta
+                    let seconds = Math.ceil(this.timeMillis / 1000)
+                    document.getElementById("timer").innerHTML = seconds
 
+                }
+                , delta)
+    }
+
+    quitThreads() {
+        if (this.countbackthread !== null) { //als er al aan het countbacken is
+            window.clearTimeout(this.countbackthread)
+        }
+    }
+
+    disconnectFromCurrentLevel() {
+        this.quitThreads()
+    }
     setlevel(level) {
+        this.disconnectFromCurrentLevel() //als een nieuw level word gekoppeld aan het ui moeten de processen die  gelinkt waren aan het oude level gestopt worden
         this.level = level
+        this.linkReadyButtonToLevel()
     }
 
     //draw picture chess board on background canvas
@@ -106,7 +124,7 @@ class UI {
     drawPieceEther(piece, x, y) {
         this.ctxether.clearRect(0, 0, this.ctxether.canvas.width, this.ctxether.canvas.width) //remove for cool effect
         let img = document.getElementById(piece)
-        this.ctxether.drawImage(img, (x - 37), (y - 37), 80, 80)
+        this.ctxether.drawImage(img, (x - 35), (y - 135), 80, 80)
     }
 
     drawGenericBoard(board, ctx) {

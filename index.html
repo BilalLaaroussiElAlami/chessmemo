@@ -8,13 +8,21 @@
 
 <body>
 
-    <!-- <p id="timer"> </p> -->
-    <p id="txt"></p>
+    <p id="timer"> </p>
+
+    <!-- <p id="txt"></p> -->
 
 
     <canvas id="background" width="600" height="600"></canvas>
     <canvas id="storage" width="600" height="300"></canvas>
-    <canvas id="ether" width="1400" height="700"></canvas>
+    <canvas id="ether" width="1420" height="600"></canvas>
+    <!-- IMPORTANT ANY OTHER HTML ELEMENTS MUST BE PLACED AFTER THE ETHER CANVAS! THE ETHER CANVAS IS INVISIBLE SO IF OTHER ELEMENTS ARE PLACED BEFORE IT
+    THE ELEMENT WILL  BE VISIBLE BUT NOT RESPONSIVE  -->
+
+    <button id="readybtn">
+        ready
+    </button>
+
 
     <script src="javascript/help.js" type="module"></script>
     <script src="javascript/enumboard.js" type="module"></script>

@@ -57,6 +57,8 @@ class Level {
         this.t2 = null
 
         this.calledSkip = false
+
+        console.log("hier", this.calledSkip)
     }
 
     setGame(game) {
@@ -65,12 +67,12 @@ class Level {
 
     play() {
         this.ui.displaymemorise(this.time_see)
+        this.ui.countback(this.time_see)
         //removes pieces once time_see is up, since then the user is allowed to manipulate the board
         this.t1 = window.setTimeout(
             () => {
-                this.canManipulate = true;
-                this.removePieces()
-                this.ui.displayreconstruct(this.time_reconstruct)
+                this.timeSeeUp()
+                this.calledSkip = true //ookal heeft de gebruiker niet echt calledSkip op true gezet moet dit nog steeds gedisabled worden zodat de gebruiker de knop niet kan gebruiken nadat de tijd op natuurlijke wijze is opgegaan
             }
             , this.time_see) //na time_see milliseconden moeten de pieces weggehaald worden en kan pieces worden opgepakt/gedropt
 
@@ -84,6 +86,14 @@ class Level {
             this.time_reconstruct + this.time_see) //
 
         this.drawLevel()
+
+    }
+
+    timeSeeUp() {
+        this.canManipulate = true;
+        this.removePieces()
+        this.ui.displayreconstruct(this.time_reconstruct)
+        this.ui.countback(this.time_see)
     }
 
     clearThreads() {
@@ -92,11 +102,10 @@ class Level {
     }
 
     skipWait() {
+        console.log("this.calledSkip: ", this.calledSkip)
         if (this.calledSkip === false) {
             window.clearTimeout(this.t1)
-            this.canManipulate = true;
-            this.removePieces()
-            this.ui.displayreconstruct(this.time_reconstruct)
+            this.timeSeeUp()
         }
         this.calledSkip = true
     }
