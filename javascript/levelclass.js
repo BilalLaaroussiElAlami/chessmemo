@@ -56,9 +56,8 @@ class Level {
         this.t1 = null
         this.t2 = null
 
-        this.calledSkip = false
+        this.currentlySeeing = true
 
-        console.log("hier", this.calledSkip)
     }
 
     setGame(game) {
@@ -66,16 +65,33 @@ class Level {
     }
 
     play() {
+        this.startSeeingCountDown()
+        this.drawLevel()
+    }
+
+    startSeeingCountDown() {
         this.ui.displaymemorise(this.time_see)
         this.ui.countback(this.time_see)
         //removes pieces once time_see is up, since then the user is allowed to manipulate the board
         this.t1 = window.setTimeout(
             () => {
-                this.timeSeeUp()
-                this.calledSkip = true //ookal heeft de gebruiker niet echt calledSkip op true gezet moet dit nog steeds gedisabled worden zodat de gebruiker de knop niet kan gebruiken nadat de tijd op natuurlijke wijze is opgegaan
+                this.endSeeCountdown()
             }
             , this.time_see) //na time_see milliseconden moeten de pieces weggehaald worden en kan pieces worden opgepakt/gedropt
+    }
 
+    endSeeCountdown() {
+        this.canManipulate = true
+        this.removePieces()
+        this.currentlySeeing = false
+        /*between seeing and reconstructing 
+        
+        */
+        this.startReconstructingCountDown()
+    }
+    startReconstructingCountDown() {
+        this.ui.displayreconstruct(this.time_reconstruct)
+        this.ui.countback(this.time_reconstruct)
         //calls gameover once time is up
         this.t2 = window.setTimeout(
             () => {
@@ -83,33 +99,20 @@ class Level {
                     this.failedLevel()
                 }
             },
-            this.time_reconstruct + this.time_see) //
-
-        this.drawLevel()
-
+            this.time_reconstruct)
     }
 
-    timeSeeUp() {
-        this.canManipulate = true;
-        this.removePieces()
-        this.ui.displayreconstruct(this.time_reconstruct)
-        this.ui.countback(this.time_see)
+    skipWait() {
+        if (this.currentlySeeing === true) {
+            window.clearTimeout(this.t1)
+            this.endSeeCountdown()
+        }
     }
 
     clearThreads() {
         window.clearTimeout(this.t1)
         window.clearTimeout(this.t2)
     }
-
-    skipWait() {
-        console.log("this.calledSkip: ", this.calledSkip)
-        if (this.calledSkip === false) {
-            window.clearTimeout(this.t1)
-            this.timeSeeUp()
-        }
-        this.calledSkip = true
-    }
-
 
     removePieces() {
         this.storage = this.currentboard.removePieces(this.toRemovePieces)
@@ -126,8 +129,6 @@ class Level {
     }
 
     wonLevel() {
-        // alert("SIIIIIUUUUUHH")
-        console.log("called wonlevel    ")
         this.clearThreads()
         this.game.exitLevel("win")
 
@@ -135,7 +136,7 @@ class Level {
 
 
     failedLevel() {
-        // alert("NOOOOOOO")
+        this.clearThreads()
         this.game.exitLevel("loss")
     }
 

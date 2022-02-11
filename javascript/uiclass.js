@@ -38,9 +38,15 @@ class UI {
 
     }
 
-    linkReadyButtonToLevel() {
-        let btn = document.getElementById("readybtn")
-        btn.onclick = () => this.level.skipWait()
+
+    //update callbacks for the new level  
+    linkUItoLevel() {
+        let readybtn = document.getElementById("readybtn")
+        readybtn.onclick = () => this.level.skipWait()
+
+        let skiplevelbtn = document.getElementById("skiplevelbtn")
+        skiplevelbtn.onclick = () => { alert("ok") }
+
     }
 
     displaymemorise(time) {
@@ -49,7 +55,6 @@ class UI {
     displayreconstruct(time) {
         //document.getElementById("txt").innerHTML = "reconstruct, you got " + time / 1000 + " seconds"
     }
-
 
     countback(time_see) {
         let delta = 100
@@ -80,7 +85,7 @@ class UI {
     setlevel(level) {
         this.disconnectFromCurrentLevel() //als een nieuw level word gekoppeld aan het ui moeten de processen die  gelinkt waren aan het oude level gestopt worden
         this.level = level
-        this.linkReadyButtonToLevel()
+        this.linkUItoLevel()
     }
 
     //draw picture chess board on background canvas
@@ -106,10 +111,8 @@ class UI {
         this.ctxback = this.canvasback.getContext("2d");
         this.canvasstorage = document.getElementById("storage");
         this.ctxstorage = this.canvasstorage.getContext("2d")
-
         this.canvasether = document.getElementById("ether")
         this.ctxether = this.canvasether.getContext("2d")
-
     }
 
     drawPiece(ctx, piece, i, j) {
