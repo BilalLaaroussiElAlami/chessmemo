@@ -4,7 +4,7 @@
     top: 100px;
     /* z-index: 0;  WHAT IS THIS */
 
-}
+}   
 
 
 #storage{
@@ -29,7 +29,7 @@ display: none
 }
 
 #timer{
-    background-color: red;
+    background-color:burlywood
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -54,5 +54,5 @@ button{
 
 }
 body{
-   /* background-color: black;*/
+    background-color: burlywood
 }

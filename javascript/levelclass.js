@@ -102,6 +102,15 @@ class Level {
             this.time_reconstruct)
     }
 
+    clearThreads() {
+        if (this.t1 !== null) {
+            window.clearTimeout(this.t1)
+        }
+        if (this.t2 !== null) {
+            window.clearTimeout(this.t2)
+        }
+    }
+
     skipWait() {
         if (this.currentlySeeing === true) {
             window.clearTimeout(this.t1)
@@ -109,10 +118,11 @@ class Level {
         }
     }
 
-    clearThreads() {
-        window.clearTimeout(this.t1)
-        window.clearTimeout(this.t2)
+    skipLevel() {
+        this.clearThreads()
+        this.failedLevel()
     }
+
 
     removePieces() {
         this.storage = this.currentboard.removePieces(this.toRemovePieces)

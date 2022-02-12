@@ -39,13 +39,13 @@ class UI {
     }
 
 
-    //update callbacks for the new level  
+    //updates callbacks for the new level  
     linkUItoLevel() {
         let readybtn = document.getElementById("readybtn")
         readybtn.onclick = () => this.level.skipWait()
 
         let skiplevelbtn = document.getElementById("skiplevelbtn")
-        skiplevelbtn.onclick = () => { alert("ok") }
+        skiplevelbtn.onclick = () => { this.level.skipLevel() }
 
     }
 
@@ -82,6 +82,7 @@ class UI {
     disconnectFromCurrentLevel() {
         this.quitThreads()
     }
+
     setlevel(level) {
         this.disconnectFromCurrentLevel() //als een nieuw level word gekoppeld aan het ui moeten de processen die  gelinkt waren aan het oude level gestopt worden
         this.level = level
