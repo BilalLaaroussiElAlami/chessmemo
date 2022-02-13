@@ -11,7 +11,7 @@ const Piece = {
     wp: "wp",
     wq: "wq",
     wr: "wr",
-    empty: "empty"
+    empty: "em"
 }
 // for (let p in Piece) {
 //     console.log(p)
